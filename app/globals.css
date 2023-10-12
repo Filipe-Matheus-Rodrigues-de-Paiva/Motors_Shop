@@ -2,26 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@import url("../styles/theme.css");
+
+body {
+  font-family: "Inter", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.text-gradient-h1 {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, #0b0d0d, #4529e6);
+}
+
+/* gray scrollbar */
+
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.shine-button {
+  transition: background-color 0.3s;
+}
+
+/* Efeito de brilho (shine) ao passar o mouse */
+.shine-button:hover {
+  background: linear-gradient(90deg, #e5e5e5, #d9d9d9);
+  background-size: 200% 100%;
+  transition: background 0.3s;
+}
+
+.shadow-modal {
+  box-shadow: 0px 3px 16px 11px rgba(22, 69, 171, 0.47);
 }
