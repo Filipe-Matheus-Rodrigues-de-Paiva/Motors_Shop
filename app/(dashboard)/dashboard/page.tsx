@@ -102,7 +102,6 @@ export default async function Dashboard({
         </div>
       </div>
 
-      {/* Paginação - fazer mais tarde */}
       <PaginationControls
         hasNextPage={end < announcements.announcements.length}
         hasPreviousPage={start > 0}

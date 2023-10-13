@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { getAnnouncementById } from "@/app/(landing)/page";
+import { getAllAnnouncements, getAnnouncementById } from "@/app/(landing)/page";
 import Button from "@/components/shared/button/Button";
 import { baseUrl } from "@/lib/types";
 import { cookies } from "next/headers";
@@ -71,6 +71,14 @@ export interface IComment {
     email: string;
   };
   timeElapsed: string;
+}
+
+export async function generateStaticParams() {
+  const announcements = await getAllAnnouncements();
+
+  return announcements.map((announcement: any) => ({
+    id: announcement.id,
+  }));
 }
 
 // Lógica de negócio

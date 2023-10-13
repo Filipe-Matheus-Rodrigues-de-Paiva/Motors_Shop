@@ -1,14 +1,7 @@
 import PaginationControls from "@/components/shared/Pagination/PaginationControls";
 import Card from "@/components/shared/card/Card";
-import randomColors from "@/constants/randomColors";
 import { baseUrl } from "@/lib/types";
 import Image from "next/image";
-
-export const getRandomColor = () => {
-  const colors = randomColors;
-  const randomIndex = Math.floor(Math.random() * colors.length);
-  return colors[randomIndex];
-};
 
 export interface IUser {
   id: string;
@@ -42,7 +35,7 @@ export interface Announcement {
   images?: IImage[];
 }
 
-async function getAllAnnouncements() {
+export async function getAllAnnouncements() {
   const res = await fetch(`${baseUrl}/announcements`, {
     cache: "no-cache",
   });
@@ -71,10 +64,10 @@ export default async function Home({
   const page = searchParams.page ?? "1";
   const limit = searchParams.limit ?? "9";
 
-  const start = (Number(page) - 1) * Number(limit); // 0, 9, 18, 27, 36, 45, 54, 63, 72, 81...
-  const end = Number(page) * Number(limit); // 9, 18, 27, 36, 45, 54, 63, 72, 81, 90...
+  const start = (Number(page) - 1) * Number(limit);
+  const end = Number(page) * Number(limit);
 
-  const entries = announcements.slice(start, end); // 0-9, 9-18, 18-27, 27-36, 36-45, 45-54, 54-63, 63-72, 72-81, 81-90...
+  const entries = announcements.slice(start, end);
 
   return (
     <>

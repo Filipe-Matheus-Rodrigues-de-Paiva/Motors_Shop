@@ -46,7 +46,7 @@ export default function Cards({
   }
 
   return (
-    <div className="flex h-[400px] min-w-[280px] max-w-[330px] flex-col gap-3 shadow-2xl">
+    <div className="flex h-fit min-w-[280px] max-w-[330px] flex-col gap-3 shadow-2xl">
       <div className="relative flex h-40 w-full">
         <img src={coverImage} alt="car" className="w-full object-cover" />
       </div>

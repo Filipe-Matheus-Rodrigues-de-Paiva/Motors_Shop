@@ -14,7 +14,6 @@ interface Props {
 }
 
 export default function Photos({ announcement }: Props) {
-  if (!announcement.images) return null;
   return (
     <div className="flex w-[95%] flex-col gap-3 border border-gray-600 bg-white p-7 md:max-w-[600px] xl:hidden xl:max-w-[440px]">
       <h1 className="heading-6-600 text-gray-200">Fotos</h1>

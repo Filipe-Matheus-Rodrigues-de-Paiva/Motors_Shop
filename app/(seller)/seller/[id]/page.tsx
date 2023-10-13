@@ -5,6 +5,7 @@ import {
 import Cards from "@/components/Dashboard/Card";
 import { getLoggedUserInfo } from "@/components/shared/navbar/NavBar";
 import PaginationControls from "@/components/shared/Pagination/PaginationControls";
+import { baseUrl } from "@/lib/types";
 
 interface IAnnouncement {
   id: string;
@@ -25,6 +26,22 @@ export interface IUserAnnouncement {
   email: string;
   account_type: string;
   announcements: IAnnouncement[];
+}
+
+async function getAllSellers() {
+  const response = await fetch(`${baseUrl}/users`);
+
+  const sellers = await response.json();
+
+  return sellers;
+}
+
+export async function generateStaticParams() {
+  const sellers = await getAllSellers();
+
+  return sellers.map((seller: any) => ({
+    id: seller.id,
+  }));
 }
 
 export default async function SellerAnnouncements({
@@ -61,12 +78,7 @@ export default async function SellerAnnouncements({
                 {owner.account_type}
               </span>
             </div>
-            <p className="text-justify">
-              {owner.description} Lorem, ipsum dolor sit amet consectetur
-              adipisicing elit. Reprehenderit blanditiis, ipsa non animi
-              deserunt asperiores, nam officia itaque quas quidem eveniet quis
-              praesentium? Quos eum officia impedit dicta! Modi, voluptatibus.
-            </p>
+            <p className="text-justify">{owner.description}</p>
           </div>
         </div>
         <div className="mt-24 flex h-[370px] w-full gap-9 overflow-x-auto px-5 py-4 md:h-fit md:flex-wrap md:justify-center md:gap-x-20 md:gap-y-10 md:overflow-hidden md:px-20">

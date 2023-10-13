@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { addComment } from "@/app/actions";
 import { toast } from "react-toastify";
-import React, { useRef } from "react";
+import { experimental_useOptimistic as useOptimistic, useRef } from "react";
 import { experimental_useFormStatus as useFormStatus } from "react-dom";
 
 interface IComment {
@@ -47,12 +47,17 @@ export default function Comments({
 }: CommentsProps) {
   const { pending } = useFormStatus();
   const ref = useRef<HTMLTextAreaElement>(null);
+  const [optimisticComments, setOptimisticComments] = useOptimistic(
+    comments,
+    (state: IComment[], action: any) => [...state, action]
+  );
 
   const clientAction = async (formData: FormData) => {
     const comment = {
       text: formData.get("comment"),
     };
 
+    setOptimisticComments((state: IComment[]) => [...state, comment]);
     const response = await addComment(comment, announcement.id);
 
     if (response?.error) {
@@ -74,7 +79,7 @@ export default function Comments({
         <h1 className="heading-6-600 text-gray-200">Comentários</h1>
 
         {comments.length > 0 ? (
-          comments.map((comment) => (
+          optimisticComments.map((comment) => (
             <CommentCard
               comment={comment}
               key={comment.id}
