@@ -73,6 +73,8 @@ export interface IComment {
   timeElapsed: string;
 }
 
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   const announcements = await getAllAnnouncements();
 
