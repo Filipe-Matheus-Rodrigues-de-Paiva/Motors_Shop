@@ -38,7 +38,6 @@ export interface Announcement {
 export async function getAllAnnouncements() {
   const res = await fetch(`${baseUrl}/announcements`, {
     cache: "no-cache",
-    next: { tags: ["announcements"] },
   });
 
   const data = await res.json();
@@ -49,7 +48,6 @@ export async function getAllAnnouncements() {
 export async function getAnnouncementById(id: string) {
   const res = await fetch(`${baseUrl}/announcements/${id}`, {
     cache: "no-cache",
-    next: { tags: ["announcement"] },
   });
 
   const data = await res.json();

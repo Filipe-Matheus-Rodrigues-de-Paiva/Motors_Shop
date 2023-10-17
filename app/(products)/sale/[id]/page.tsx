@@ -57,7 +57,6 @@ async function getAnnouncementComments(id: string) {
     const data = await response.json();
     return data;
   } else {
-    console.log(response.statusText);
     throw new Error("Não foi possível carregar os comentários");
   }
 }

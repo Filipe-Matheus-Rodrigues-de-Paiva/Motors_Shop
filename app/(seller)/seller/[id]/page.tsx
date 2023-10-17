@@ -5,6 +5,7 @@ import {
 import Cards from "@/components/Dashboard/Card";
 import { getLoggedUserInfo } from "@/components/shared/navbar/NavBar";
 import PaginationControls from "@/components/shared/Pagination/PaginationControls";
+import { baseUrl } from "@/lib/types";
 
 interface IAnnouncement {
   id: string;
@@ -25,6 +26,24 @@ export interface IUserAnnouncement {
   email: string;
   account_type: string;
   announcements: IAnnouncement[];
+}
+
+async function getAllSellers() {
+  const response = await fetch(`${baseUrl}/users`, {
+    cache: "no-cache",
+  });
+
+  const sellers = await response.json();
+
+  return sellers;
+}
+
+export async function generateStaticParams() {
+  const sellers = await getAllSellers();
+
+  return sellers.map((seller: any) => ({
+    id: seller.id,
+  }));
 }
 
 export default async function SellerAnnouncements({
