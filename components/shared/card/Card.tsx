@@ -36,14 +36,16 @@ export default async function Card({
 
   return (
     <Link href={`/sale/${id}`}>
-      <div className="flex h-full min-w-[280px] max-w-[330px] flex-col gap-2">
+      <div className="flex h-full min-w-[280px] max-w-[330px] flex-col gap-2 shadow-2xl xl:min-w-[330px] xl:justify-between">
         <div className="relative flex h-40 w-full">
           <img src={coverImage} alt="car" className="w-full object-cover" />
         </div>
         <h3 className="heading-7-600 text-black">
           {brand} - {model}
         </h3>
-        <p className="body-2-400 text-justify text-gray-300">{description}</p>
+        <p className="body-2-400 line-clamp-4 text-justify text-gray-300">
+          {description}
+        </p>
         <div className="flex items-center gap-3">
           <span
             className={`inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-100 text-white`}

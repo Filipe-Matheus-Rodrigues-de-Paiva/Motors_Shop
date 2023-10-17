@@ -81,8 +81,6 @@ export async function generateStaticParams() {
   }));
 }
 
-// Lógica de negócio
-
 export default async function Product({ params }: { params: { id: string } }) {
   const announcement: IAnnouncement = await getAnnouncementById(params.id);
   const comments: IComment[] = await getAnnouncementComments(params.id);
