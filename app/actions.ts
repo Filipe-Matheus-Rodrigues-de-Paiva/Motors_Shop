@@ -204,7 +204,6 @@ export async function deleteUser(id: string) {
     await deleteCookies();
 
     revalidateTag("userInfo");
-    revalidateTag("announcements");
   } else {
     return {
       error: "Erro ao remover usuário",
