@@ -29,7 +29,9 @@ export interface IUserAnnouncement {
 }
 
 async function getAllSellers() {
-  const response = await fetch(`${baseUrl}/users`);
+  const response = await fetch(`${baseUrl}/users`, {
+    cache: "no-cache",
+  });
 
   const sellers = await response.json();
 
