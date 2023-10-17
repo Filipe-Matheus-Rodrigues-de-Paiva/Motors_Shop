@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { getAnnouncementById } from "@/app/(landing)/page";
+import { getAllAnnouncements, getAnnouncementById } from "@/app/(landing)/page";
 import Button from "@/components/shared/button/Button";
 import { baseUrl } from "@/lib/types";
 import { cookies } from "next/headers";
@@ -57,6 +57,7 @@ async function getAnnouncementComments(id: string) {
     const data = await response.json();
     return data;
   } else {
+    console.log(response.statusText);
     throw new Error("Não foi possível carregar os comentários");
   }
 }
@@ -71,6 +72,14 @@ export interface IComment {
     email: string;
   };
   timeElapsed: string;
+}
+
+export async function generateStaticParams() {
+  const announcements = await getAllAnnouncements();
+
+  return announcements.map((announcement: any) => ({
+    id: announcement.id,
+  }));
 }
 
 export default async function Product({ params }: { params: { id: string } }) {

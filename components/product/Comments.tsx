@@ -49,20 +49,7 @@ export default function Comments({
   const ref = useRef<HTMLTextAreaElement>(null);
   const [optimisticComments, setOptimisticComments] = useOptimistic(
     comments,
-    (state: IComment[], action: any) => [
-      ...state,
-      {
-        id: "",
-        text: action.text,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        user: {
-          name: user.name,
-          email: user.email,
-        },
-        timeElapsed: "há menos de um minuto",
-      },
-    ]
+    (state: IComment[], action: any) => [...state, action]
   );
 
   const clientAction = async (formData: FormData) => {
@@ -70,22 +57,7 @@ export default function Comments({
       text: formData.get("comment"),
     };
 
-    setOptimisticComments((state: IComment[]) => {
-      return [
-        ...state,
-        {
-          id: "",
-          text: comment.text,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-          user: {
-            name: user.name,
-            email: user.email,
-          },
-          timeElapsed: "há menos de um minuto",
-        },
-      ];
-    });
+    setOptimisticComments((state: IComment[]) => [...state, comment]);
     const response = await addComment(comment, announcement.id);
 
     if (response?.error) {
