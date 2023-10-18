@@ -46,16 +46,14 @@ export default function Cards({
   }
 
   return (
-    <div className="flex h-fit min-w-[280px] max-w-[330px] flex-col gap-3 shadow-2xl xl:min-w-[330px]">
+    <div className="flex h-fit min-w-[280px] max-w-[330px] flex-col gap-3 shadow-2xl">
       <div className="relative flex h-40 w-full">
         <img src={coverImage} alt="car" className="w-full object-cover" />
       </div>
       <h3 className="heading-7-600 text-black">
         {brand} - {model}
       </h3>
-      <p className="body-2-400 line-clamp-2 text-justify text-gray-300">
-        {description}
-      </p>
+      <p className="body-2-400 text-justify text-gray-300">{description}</p>
       {path !== "/dashboard" ? (
         <div className="flex items-center gap-3">
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-100 text-white">

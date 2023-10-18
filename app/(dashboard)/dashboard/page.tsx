@@ -63,7 +63,7 @@ export default async function Dashboard({
 
   return (
     <div className="min-h-fit">
-      <div className="mt-20 flex flex-col gap-40 xl:gap-20">
+      <div className="mt-20 flex flex-col gap-52 md:gap-40">
         <div className="relative max-h-[40vh] w-full bg-brand-100 pt-5">
           <div className="mx-auto flex min-h-fit w-[95%] flex-col gap-4 rounded border bg-gray-1100 px-7 py-10">
             <span className="heading-3-500 flex h-20 w-20 items-center justify-center rounded-full bg-brand-200 text-white">
@@ -75,16 +75,12 @@ export default async function Dashboard({
                 {owner.account_type}
               </span>
             </div>
-            <p className="line-clamp-4 text-justify">{owner.description}</p>
+            <p className="text-justify">{owner.description}</p>
             <CreateAnnouncementModal />
           </div>
         </div>
-        <div className=" pt-8 xl:self-start">
-          {entries.length > 0 && (
-            <h1 className="heading-6-500 w-fit px-5 text-black md:w-full md:px-0 md:text-center">
-              Anúncios
-            </h1>
-          )}
+        <div className="mt-[-20px]">
+          <h1 className="heading-6-500 text-center text-black">Anúncios</h1>
           <div className="flex h-[450px] w-full gap-9 overflow-x-auto px-5 py-4 md:h-fit md:flex-wrap md:justify-center md:gap-x-20 md:gap-y-10 md:overflow-hidden md:px-20">
             {entries.map((announcement) => (
               <Cards

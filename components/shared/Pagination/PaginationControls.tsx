@@ -34,11 +34,9 @@ export default function PaginationControls({
           &lt; Anterior
         </Link>
       )}
-      {Math.ceil(announcements.length / Number(per_page)) > 1 && (
-        <h1 className="text-center">
-          {page} de {Math.ceil(announcements.length / Number(per_page))}
-        </h1>
-      )}
+      <h1 className="text-center">
+        {page} de {Math.ceil(announcements.length / Number(per_page))}
+      </h1>
       {hasNextPage && (
         <Link
           href={{

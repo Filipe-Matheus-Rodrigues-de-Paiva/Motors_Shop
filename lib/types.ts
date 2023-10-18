@@ -2,32 +2,22 @@ import { z } from "zod";
 
 export const registerSchema = z
   .object({
-    name: z.string().max(150, "O nome deve ter no máximo 150 caracteres"),
-    email: z
-      .string()
-      .email({ message: "Insira um email válido" })
-      .max(100, "O email deve ter no máximo 100 caracteres"),
-    cpf: z.string().max(17, "O CPF deve ter no máximo 17 caracteres"),
-    phone_number: z
-      .string()
-      .max(15, "O número de telefone deve ter no máximo 15 caracteres"),
+    name: z.string().max(150),
+    email: z.string().email().max(100),
+    cpf: z.string().max(17),
+    phone_number: z.string().max(15),
     date_birth: z
       .string()
-      .max(10, "A data de nascimento deve ter no máximo 10 caracteres")
-      .regex(
-        /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-        "Insira uma data de nascimento válida"
-      ),
+      .max(10)
+      .regex(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/),
     description: z.string().max(400),
     address: z.object({
-      cep: z.string().max(9, "O CEP deve ter no máximo 9 caracteres"),
-      state: z.string().max(2, "O estado deve ter no máximo 2 caracteres"),
-      city: z.string().max(50, "A cidade deve ter no máximo 50 caracteres"),
-      street: z.string().max(200, "A rua deve ter no máximo 200 caracteres"),
-      number: z.number().nonnegative("O número deve ser positivo"),
-      complement: z
-        .string()
-        .max(70, "O complemento deve ter no máximo 70 caracteres"),
+      cep: z.string().max(9),
+      state: z.string().max(2),
+      city: z.string().max(50),
+      street: z.string().max(200),
+      number: z.number(),
+      complement: z.string().max(70),
     }),
     account_type: z.enum(["anunciante", "comprador"]),
     password: z
@@ -70,48 +60,22 @@ export const updateUserSchema = z.object({
 });
 
 export const updateAddressSchema = z.object({
-  cep: z
-    .string()
-    .max(9, "O CEP deve ter no máximo 9 caracteres")
-    .optional()
-    .or(z.undefined()),
-  state: z
-    .string()
-    .max(2, "O estado deve ter no máximo 2 caracteres")
-    .optional()
-    .or(z.undefined()),
-  city: z
-    .string()
-    .max(50, "A cidade deve ter no máximo 50 caracteres")
-    .optional()
-    .or(z.undefined()),
-  street: z
-    .string()
-    .max(200, "A rua deve ter no máximo 200 caracteres")
-    .optional()
-    .or(z.undefined()),
-  number: z
-    .number()
-    .nonnegative("O número não pode ser negativo")
-    .optional()
-    .or(z.undefined()),
-  complement: z
-    .string()
-    .max(70, "O complemento deve ter no máximo 70 caracteres")
-    .optional()
-    .or(z.undefined()),
+  cep: z.string().max(9).optional().or(z.undefined()),
+  state: z.string().max(2).optional().or(z.undefined()),
+  city: z.string().max(50).optional().or(z.undefined()),
+  street: z.string().max(200).optional().or(z.undefined()),
+  number: z.number().positive().optional().or(z.undefined()),
+  complement: z.string().max(70).optional().or(z.undefined()),
 });
 
 export const createAnnouncementSchema = z.object({
-  brand: z.string().max(50, "A marca deve ter no máximo 50 caracteres"),
-  model: z.string().max(100, "O modelo deve ter no máximo 100 caracteres"),
+  brand: z.string().max(50),
+  model: z.string().max(100),
   year: z.number().positive(),
   fueling: z.enum(["gasolina", "etanol"]),
-  kilometers: z.number().nonnegative("Os quilômetros não podem ser negativos"),
-  color: z.string().max(20, "A cor deve ter no máximo 20 caracteres"),
-  fipe_price: z
-    .string()
-    .max(50, "O preço FIPE deve ter no máximo 50 caracteres"),
+  kilometers: z.number().nonnegative(),
+  color: z.string().max(20),
+  fipe_price: z.string().max(50),
   description: z.string(),
   coverImage: z.string(),
   images: z.array(z.object({ imageUrl: z.string() })).or(z.undefined()),

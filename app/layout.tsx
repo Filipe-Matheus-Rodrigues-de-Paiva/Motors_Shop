@@ -26,10 +26,8 @@ export default function RootLayout({
         <ToastContainer />
         <Toaster />
         <NavBar />
-        <main>
-          {children}
-          <Footer />
-        </main>
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

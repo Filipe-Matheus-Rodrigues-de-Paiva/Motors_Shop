@@ -116,7 +116,7 @@ export default function FormCreate() {
         <label className="body-2-500 text-gray-200">Descrição</label>
         <textarea
           name="description"
-          className="h-28 w-full resize-none border-[1.5px] border-gray-800 p-3 outline-none focus:border-brand-200"
+          className="h-28 w-full resize-none border-[1.5px] border-gray-800 px-4 outline-none focus:border-brand-200"
           placeholder="ex: Carro em ótimo estado, único dono, sem multas, sem dívidas, etc."
         />
       </div>
