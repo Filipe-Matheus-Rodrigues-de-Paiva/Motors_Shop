@@ -62,7 +62,7 @@ export default async function Dashboard({
   const entries = announcements.announcements.slice(start, end);
 
   return (
-    <div className="min-h-fit">
+    <div className="min-h-screen">
       <div className="mt-20 flex flex-col gap-40 xl:gap-20">
         <div className="relative max-h-[40vh] w-full bg-brand-100 pt-5">
           <div className="mx-auto flex min-h-fit w-[95%] flex-col gap-4 rounded border bg-gray-1100 px-7 py-10">
@@ -79,29 +79,35 @@ export default async function Dashboard({
             <CreateAnnouncementModal />
           </div>
         </div>
-        <div className="pt-8 xl:self-start">
+        <div className="pt-8 xl:w-full xl:self-start">
           {entries.length > 0 && (
             <h1 className="heading-6-500 w-fit px-5 text-black md:w-full md:px-0 md:text-center">
               Anúncios
             </h1>
           )}
           <div className="flex h-[450px] w-full gap-9 overflow-x-auto px-5 py-4 md:h-fit md:flex-wrap md:justify-center md:gap-x-20 md:gap-y-10 md:overflow-hidden md:px-20">
-            {entries.map((announcement) => (
-              <Cards
-                key={announcement.id}
-                id={announcement.id}
-                brand={announcement.brand}
-                model={announcement.model}
-                year={announcement.year}
-                fueling={announcement.fueling}
-                kilometers={announcement.kilometers}
-                color={announcement.color}
-                fipe_price={announcement.fipe_price}
-                description={announcement.description}
-                coverImage={announcement.coverImage}
-                owner={owner}
-              />
-            ))}
+            {entries.length === 0 ? (
+              <h1 className="body-2-500 sm:heading-4-600 h-fit w-full text-center text-black">
+                Você ainda não tem anúncios ativos!
+              </h1>
+            ) : (
+              entries.map((announcement) => (
+                <Cards
+                  key={announcement.id}
+                  id={announcement.id}
+                  brand={announcement.brand}
+                  model={announcement.model}
+                  year={announcement.year}
+                  fueling={announcement.fueling}
+                  kilometers={announcement.kilometers}
+                  color={announcement.color}
+                  fipe_price={announcement.fipe_price}
+                  description={announcement.description}
+                  coverImage={announcement.coverImage}
+                  owner={owner}
+                />
+              ))
+            )}
           </div>
         </div>
       </div>
