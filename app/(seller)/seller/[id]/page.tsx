@@ -5,9 +5,6 @@ import {
 import Cards from "@/components/Dashboard/Card";
 import { getLoggedUserInfo } from "@/components/shared/navbar/NavBar";
 import PaginationControls from "@/components/shared/Pagination/PaginationControls";
-import { baseUrl } from "@/lib/types";
-
-export const revalidate = 60;
 
 interface IAnnouncement {
   id: string;
@@ -28,24 +25,6 @@ export interface IUserAnnouncement {
   email: string;
   account_type: string;
   announcements: IAnnouncement[];
-}
-
-async function getAllSellers() {
-  const response = await fetch(`${baseUrl}/users`, {
-    cache: "no-cache",
-  });
-
-  const data = await response.json();
-
-  return data;
-}
-
-export async function generateStaticParams() {
-  const sellers = await getAllSellers();
-
-  return sellers.map((seller: any) => ({
-    params: { id: seller.id },
-  }));
 }
 
 export default async function SellerAnnouncements({
